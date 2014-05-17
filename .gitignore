@@ -12,6 +12,7 @@ build/harness
 tools/*.png
 tools/devserver
 tools/randtest
+deps/include/*
 linux/*
 osx/*
 ios/*
