@@ -99,7 +99,7 @@ struct LTEventVisitor : LTSceneNodeVisitor {
         }
         if (!consumed) {
             LTfloat old_x = 0, old_y = 0, old_prev_x = 0, old_prev_y = 0;
-            if (LT_EVENT_MATCH(event->event, LT_EVENT_POINTER)) { 
+            if (LT_EVENT_MATCH(event->event, LT_EVENT_POINTER)) {
                 old_x = event->x;
                 old_y = event->y;
                 old_prev_x = event->prev_x;
@@ -112,7 +112,7 @@ struct LTEventVisitor : LTSceneNodeVisitor {
                 }
             }
             node->visit_children(this, true);
-            if (LT_EVENT_MATCH(event->event, LT_EVENT_POINTER)) { 
+            if (LT_EVENT_MATCH(event->event, LT_EVENT_POINTER)) {
                 event->x = old_x;
                 event->y = old_y;
                 event->prev_x = old_prev_x;
@@ -215,6 +215,29 @@ static const LTEnumConstant key_enum_vals[] = {
     {"del", LT_KEY_DEL},
     {"esc", LT_KEY_ESC},
     {"back", LT_KEY_BACK},
+
+    {"~", LT_KEY_TILDE},
+    {"!", LT_KEY_EXCLAMATION},
+    {"@", LT_KEY_ATRATE},
+    {"#", LT_KEY_HASH},
+    {"$", LT_KEY_DOLLAR},
+    {"%", LT_KEY_PERCENT},
+    {"^", LT_KEY_CARET},
+    {"&", LT_KEY_AMPERSAND},
+    {"*", LT_KEY_ASTERISK},
+    {"(", LT_KEY_LEFT_ROUND_BRACKET},
+    {")", LT_KEY_RIGHT_ROUND_BRACKET},
+    {"_", LT_KEY_UNDERSCORE},
+    {"=", LT_KEY_EQUALS},
+    {"{", LT_KEY_LEFT_CURLY},
+    {"}", LT_KEY_RIGHT_CURLY},
+    {":", LT_KEY_COLON},
+    {"\"", LT_KEY_QUOTES},
+    {"<", LT_KEY_LEFT_ANGLE},
+    {">", LT_KEY_RIGHT_ANGLE},
+    {"?", LT_KEY_QUESTION},
+    {"|", LT_KEY_PIPE},
+
     {NULL, 0}};
 LT_REGISTER_FIELD_ENUM(LTEvent, key, LTKey, key_enum_vals)
 
