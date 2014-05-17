@@ -31,7 +31,7 @@ static void key_handler(int key, int state);
 static void mouse_button_handler(int button, int action);
 static void mouse_pos_handler(int x, int y);
 static void resize_handler(int w, int h);
-static LTKey convert_key(int key);
+static LTKey convert_key(int key, bool shiftkey);
 static bool fullscreen = lt_fullscreen;
 static void process_args(int argc, const char **argv);
 static const char *dir = STR(LTDATADIR);
@@ -237,7 +237,11 @@ static void setup_window() {
 }
 
 static void key_handler(int key, int state) {
-    LTKey ltkey = convert_key(key);
+    bool shiftkey = state == GLFW_PRESS &&
+                    (glfwGetKey(GLFW_KEY_LSHIFT) == GLFW_PRESS ||
+                     glfwGetKey(GLFW_KEY_RSHIFT) == GLFW_PRESS);
+
+    LTKey ltkey = convert_key(key, shiftkey);
     if (state == GLFW_PRESS) {
         if (key == GLFW_KEY_ESC
             && (glfwGetKey(GLFW_KEY_LCTRL) == GLFW_PRESS
@@ -287,33 +291,56 @@ static void resize_handler(int w, int h) {
     ltLuaResizeWindow(w, h);
 }
 
-static LTKey convert_key(int key) {
+static LTKey convert_key(int key, bool shiftkey) {
+
     switch(key) {
         case GLFW_KEY_TAB: return LT_KEY_TAB;
         case GLFW_KEY_ENTER: return LT_KEY_ENTER;
         case GLFW_KEY_ESC: return LT_KEY_ESC;
         case GLFW_KEY_SPACE: return LT_KEY_SPACE;
-        case '\'': return LT_KEY_APOS;
-        case '=': return LT_KEY_PLUS;
-        case ',': return LT_KEY_COMMA;
-        case '-': return LT_KEY_MINUS;
-        case '.': return LT_KEY_PERIOD;
-        case '/': return LT_KEY_SLASH;
-        case '0': return LT_KEY_0;
-        case '1': return LT_KEY_1;
-        case '2': return LT_KEY_2;
-        case '3': return LT_KEY_3;
-        case '4': return LT_KEY_4;
-        case '5': return LT_KEY_5;
-        case '6': return LT_KEY_6;
-        case '7': return LT_KEY_7;
-        case '8': return LT_KEY_8;
-        case '9': return LT_KEY_9;
-        case ';': return LT_KEY_SEMI_COLON;
-        case '[': return LT_KEY_LEFT_BRACKET;
-        case '\\': return LT_KEY_BACKSLASH;
-        case ']': return LT_KEY_RIGHT_BRACKET;
-        case '`': return LT_KEY_TICK;
+        case '\'':
+          if (shiftkey) return LT_KEY_QUOTES; return LT_KEY_APOS;
+        case '=':
+          if (shiftkey) return LT_KEY_PLUS;   return LT_KEY_EQUALS;
+        case ',':
+          if (shiftkey) return LT_KEY_LEFT_ANGLE; return LT_KEY_COMMA;
+        case '-':
+          if (shiftkey) return LT_KEY_UNDERSCORE; return LT_KEY_MINUS;
+        case '.':
+          if (shiftkey) return LT_KEY_RIGHT_ANGLE; return LT_KEY_PERIOD;
+        case '/':
+          if (shiftkey) return LT_KEY_QUESTION; return LT_KEY_SLASH;
+        case '0':
+          if (shiftkey) return LT_KEY_RIGHT_ROUND_BRACKET; return LT_KEY_0;
+        case '1':
+          if (shiftkey) return LT_KEY_EXCLAMATION; return LT_KEY_1;
+        case '2':
+          if (shiftkey) return LT_KEY_ATRATE; return LT_KEY_2;
+        case '3':
+          if (shiftkey) return LT_KEY_HASH; return LT_KEY_3;
+        case '4':
+          if (shiftkey) return LT_KEY_DOLLAR; return LT_KEY_4;
+        case '5':
+          if (shiftkey) return LT_KEY_PERCENT; return LT_KEY_5;
+        case '6':
+          if (shiftkey) return LT_KEY_CARET; return LT_KEY_6;
+        case '7':
+          if (shiftkey) return LT_KEY_AMPERSAND; return LT_KEY_7;
+        case '8':
+          if (shiftkey) return LT_KEY_ASTERISK; return LT_KEY_8;
+        case '9':
+          if (shiftkey) return LT_KEY_LEFT_ROUND_BRACKET; return LT_KEY_9;
+        case ';':
+          if (shiftkey) return LT_KEY_COLON; return LT_KEY_SEMI_COLON;
+        case '[':
+          if (shiftkey) return LT_KEY_LEFT_CURLY; return LT_KEY_LEFT_BRACKET;
+        case '\\':
+          if (shiftkey) return LT_KEY_PIPE; return LT_KEY_BACKSLASH;
+        case ']':
+          if (shiftkey) return LT_KEY_RIGHT_CURLY; return LT_KEY_RIGHT_BRACKET;
+        case '`':
+          if (shiftkey) return LT_KEY_TILDE; return LT_KEY_TICK;
+
         case 'A': return LT_KEY_A;
         case 'B': return LT_KEY_B;
         case 'C': return LT_KEY_C;
@@ -340,6 +367,7 @@ static LTKey convert_key(int key) {
         case 'X': return LT_KEY_X;
         case 'Y': return LT_KEY_Y;
         case 'Z': return LT_KEY_Z;
+
         case GLFW_KEY_DEL: return LT_KEY_DEL;
         case GLFW_KEY_BACKSPACE: return LT_KEY_DEL;
         case GLFW_KEY_UP: return LT_KEY_UP;
@@ -347,6 +375,7 @@ static LTKey convert_key(int key) {
         case GLFW_KEY_RIGHT: return LT_KEY_RIGHT;
         case GLFW_KEY_LEFT: return LT_KEY_LEFT;
     }
+
     return LT_KEY_UNKNOWN;
 }
 
