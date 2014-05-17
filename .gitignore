@@ -12,10 +12,10 @@ build/harness
 tools/*.png
 tools/devserver
 tools/randtest
-linux/
-osx/
-ios/
-./android/
+linux/*
+osx/*
+ios/*
+android/*
 mingw/
 *.out
 *.res

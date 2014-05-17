@@ -1,156 +1,65 @@
-math.randomseed(os.time())
+local mesh = lt.Mesh()
+local xyzs = {}
+local indices = {}
+local n, m = 80, 50
+local w, d = 4800, 100
+local shift = w / 2 - lt.config.world_width / 2
+local i = 1
+for x = 1, n do
+    for z = 1, m do
+        table.append(xyzs, {((x - 1) / (n - 1)) * w - shift, 0, -((z - 1) / (m - 1)) * d})
+        if x < n and z < m then
+            -- counter-clockwise winding for front faces
+            table.append(indices, {
+                i, i + m, i + 1,
+                i + m, i + m + 1, i + 1,
+            })
+        end
+        i = i + 1
+    end
+end
 
-import "commons"
-import "ui"
-import "audio"
-import "level"
+mesh:SetXYZs(xyzs)
+mesh:SetIndices(indices)
+mesh:ComputeNormals()
 
---lt.FixGlobals()
------------------------------
-player = {
-  defaultState = {running = true},
-  state = {running = true},
+local t = 0
+local amplitude = 50
+mesh:Action(function(dt)
+    t = t + dt
+    for x = 1, n do
+        for z = 1, m do
+            local i = (x - 1) * m + z
+            i = (i - 1) * 3 + 2
+            xyzs[i] = 
+                (sin(((x - 1) / (n - 1)) * w * 0.7 + t * 100)
+                + sin(((z - 1) / (m - 1)) * d * 10 + t * 100)) * amplitude
+                - 2 * amplitude
+        end
+    end
+    mesh:SetXYZs(xyzs)
+    mesh:ComputeNormals()
+end)
 
-  config = {
-    run = {
-      fps = 60,
-      size = {w=0.25, h=0.5}
-    },
+local light = mesh
+    :CullFace("back")
+    :DepthTest()
+    :Light{x = 0, y = 0, z = 0, fixed=false, c = 1}
 
-    jump = {
-      fps = 1,
-      time = 0.26
-    },
-
-    roll = {
-      fps = 60,
-      size = {w=0.25, h=0.25},
-      time = 0.45
+light:Action(function(dt, l)
+    l:Tween{
+        diffuse_red = math.random(),
+        diffuse_green = math.random(),
+        diffuse_blue = math.random(),
+        ambient_red = math.random(),
+        ambient_green = math.random(),
+        ambient_blue = math.random(),
+        specular_red = math.random(),
+        specular_green = math.random(),
+        specular_blue = math.random(),
+        time = 1
     }
-  }
+    return 1
+end)
 
-}
-
-layers, gameStarted = {}, false
-world = box2d.World(0, -25)
-world.auto_clear_forces = true
-
-main_layer = lt.root
-
--- world.debug = true
-world.scale = 1
-
-local
-function makeAndroidControls()
-  local t,b,l,r = lt.config.world_top, lt.config.world_bottom, lt.config.world_left, lt.config.world_right
-  local controls = lt.Layer()
-
-  local w, h = 0 - l, 0 - t
-
-  local cl = lt.Rect(l, t, 0, h):Tint(0, 0, 0, 0)
-  local cr = lt.Rect(0, t, w, h):Tint(0, 0, 0, 0)
-
-  if world.debug then
-    cl = cl:Tint(1, 1, 1, 0.3)
-    cr = cr:Tint(1, 0, 1, 0.3)
-  end
-
-  cl:PointerDown(function()
-    player.state = {ducking = true}
-  end,l,h,0,t)
-
-  cr:PointerDown(function()
-    player.state = {jumping = true}
-  end,0,h,w,t)
-
-  controls:Insert(cl)
-  controls:Insert(cr)
-
-  return controls
-end
-
-function start()
-  --clear
-  if layers["terrain"] then
-    for _,body in ipairs(layers["terrain"].bodies) do
-      body:Destroy()
-    end
-  end
-
-  if main_scene then
-    main_scene:Remove(layers["bg"])
-    main_scene:Remove(layers["ground"])
-    main_scene:Remove(layers["terrain"])
-    main_scene:Remove(layers["controls"])
-    main_scene:Remove(layers["ui"])
-    unmakeSound("title")
-  end
-  --End clear
-
-  main_layer.child = lt.Layer()
-  main_scene = main_layer.child
-
-  --Main layer
-  local debugLayer = lt.Layer()
-
-  layers["bg"] = makeBG()
-  layers["ground"] = makeGround()
-  layers["terrain"] = makeTerrain()
-  layers["controls"] = makeAndroidControls()
-  layers["ui"] = makeGameUI()
-
-  main_scene:Insert(layers["bg"])
-  main_scene:Insert(layers["ground"])
-  main_scene:Insert(layers["terrain"])
-  main_scene:Insert(layers["controls"])
-  main_scene:Insert(layers["ui"])
-  main_scene:Insert(makeSound("title"))
-
-  main_scene:Action(function(dt)
-    world:Step(dt)
-    lt.AdvanceGlobalSprites(dt)
-
-    if world.debug then
-      main_scene:Remove(debugLayer)
-      debugLayer = lt.Text("Bodies Count: " .. world.body_count, font, "center", "center"):Scale(0.3)
-      main_scene:Insert(debugLayer)
-    end
-
-  end)
-
-  main_scene:KeyDown(function(event)
-    if event.key == "enter" then
-
-      if not gameStarted then
-        import "play"
-      end
-
-    elseif event.key == "up" then
-
-      if player.rollTimer == 0 then
-        main_scene:Insert(makeSound("jump"))
-        player.state = {jumping = true}
-      end
-
-    elseif event.key == "down" then
-      player.state = {ducking = true}
-    elseif event.key == "esc" then
-      lt.Quit()
-    end
-
-  end)
-
-  main_scene:KeyUp(function(event)
-    if event.key == "up" then
-
-      unmakeSound("jump")
-
-      if player.jumpTimer == 0 then
-        player.state = player.defaultState
-      end
-
-    end
-  end)
-end
-
-start()
+lt.root.child = light:Lighting():Perspective(1, 25, 200)
