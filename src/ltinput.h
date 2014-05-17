@@ -61,6 +61,29 @@ enum LTKey {
     LT_KEY_ESC,
 
     LT_KEY_BACK, // Android back button
+
+    //Extended characters
+    LT_KEY_TILDE,
+    LT_KEY_EXCLAMATION,
+    LT_KEY_ATRATE,
+    LT_KEY_HASH,
+    LT_KEY_DOLLAR,
+    LT_KEY_PERCENT,
+    LT_KEY_CARET,
+    LT_KEY_AMPERSAND,
+    LT_KEY_ASTERISK,
+    LT_KEY_LEFT_ROUND_BRACKET,
+    LT_KEY_RIGHT_ROUND_BRACKET,
+    LT_KEY_UNDERSCORE,
+    LT_KEY_EQUALS,
+    LT_KEY_LEFT_CURLY,
+    LT_KEY_RIGHT_CURLY,
+    LT_KEY_COLON,
+    LT_KEY_QUOTES,
+    LT_KEY_LEFT_ANGLE,
+    LT_KEY_RIGHT_ANGLE,
+    LT_KEY_QUESTION,
+    LT_KEY_PIPE
 };
 
 enum LTGamePadButton {
