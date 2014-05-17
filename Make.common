@@ -64,7 +64,7 @@ VORBIS=vorbis
 #ISDK=/Developer/Platforms/iPhoneOS.platform/Developer
 #ISDKVER=iPhoneOS4.3.sdk
 ISDK=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer
-ISDKVER=iPhoneOS7.0.sdk
+ISDKVER=iPhoneOS7.1.sdk
 # XXX With the iOS 7 SDK the C compiler (gcc/clang) is in a separate directory
 # to the rest of the toolchain (e.g. ar, ld, etc). You need to create a gcc
 # symbolic link in the following directory for the build to work.
@@ -88,12 +88,13 @@ IOS_CPP=g++
 
 # Android settings
 
-NDK=$(HOME)/muheyo/android-ndk-r7
+VER=4.6
+NDK=$(HOME)/Desktop/Projects/Libraries/android-ndk-r9b
 NDKABI=9
-NDKVER=$(NDK)/toolchains/arm-linux-androideabi-4.4.3
-NDKP=$(NDKVER)/prebuilt/darwin-x86/bin/arm-linux-androideabi-
+NDKVER=$(NDK)/toolchains/arm-linux-androideabi-$(VER)
+NDKP=$(NDKVER)/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-
 NDKSYSROOT=$(NDK)/platforms/android-$(NDKABI)/arch-arm
-NDKSTL=-I$(NDK)/sources/cxx-stl/gnu-libstdc++/include -I$(NDK)/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include
+NDKSTL=-I$(NDK)/sources/cxx-stl/gnu-libstdc++/$(VER)/include -I$(NDK)/sources/cxx-stl/gnu-libstdc++/$(VER)/libs/armeabi/include
 
 # Tizen settings
 

@@ -318,6 +318,11 @@ LTJoint *lt_expect_LTJoint(lua_State *L, int arg);
 void *lt_alloc_LTBody(lua_State *L);
 void *lt_alloc_LTFixture(lua_State *L);
 
+static LTfloat get_body_count(LTObject *obj) {
+  LTWorld *w = (LTWorld*)obj;
+  return w->world->GetBodyCount();
+}
+
 static LTfloat get_world_gx(LTObject *obj) {
     LTWorld *w = (LTWorld*)obj;
     return w->world->GetGravity().x;
@@ -351,7 +356,7 @@ static void set_world_auto_clear_forces(LTObject *obj, LTbool val) {
 }
 
 static int world_step(lua_State *L) {
-    int num_args = ltLuaCheckNArgs(L, 2); 
+    int num_args = ltLuaCheckNArgs(L, 2);
     LTWorld *world = lt_expect_LTWorld(L, 1);
     LTfloat time_step = luaL_checknumber(L, 2);
     int velocity_iterations = 8;
@@ -478,6 +483,7 @@ static LTObject* get_body_world(LTObject* obj) {
     LTBody *b = (LTBody*)obj;
     return b->world;
 }
+
 
 static LTfloat get_body_x(LTObject *obj) {
     LTBody *b = (LTBody*)obj;
@@ -844,7 +850,7 @@ static LTObject* get_fixture_body(LTObject* obj) {
 }
 
 static int destroy_fixture(lua_State *L) {
-    ltLuaCheckNArgs(L, 1); 
+    ltLuaCheckNArgs(L, 1);
     LTFixture *fixture = lt_expect_LTFixture(L, 1);
     if (fixture->fixture != NULL) {
         fixture->destroy();
@@ -887,7 +893,7 @@ static int world_ray_cast(lua_State *L) {
     LTfloat y1 = luaL_checknumber(L, 3) / scale;
     LTfloat x2 = luaL_checknumber(L, 4) / scale;
     LTfloat y2 = luaL_checknumber(L, 5) / scale;
-    
+
     RayCastCallback cb;
     world->world->RayCast(&cb, b2Vec2(x1, y1), b2Vec2(x2, y2));
 
@@ -896,7 +902,7 @@ static int world_ray_cast(lua_State *L) {
     std::map<LTfloat, RayCastData>::iterator it;
     for (it = cb.hits.begin(); it != cb.hits.end(); it++) {
         lua_newtable(L);
-    
+
         LTFixture *fixture = (LTFixture*)it->second.fixture->GetUserData();
         if (fixture->body != NULL) {
             ltLuaGetRef(L, 1, world->body_refs[fixture->body]); // push body
@@ -1045,8 +1051,12 @@ LT_REGISTER_TYPE(LTWorld, "box2d.World", "lt.Object");
 LT_REGISTER_PROPERTY_FLOAT(LTWorld, gx, get_world_gx, set_world_gx);
 LT_REGISTER_PROPERTY_FLOAT(LTWorld, gy, get_world_gy, set_world_gy);
 LT_REGISTER_PROPERTY_BOOL(LTWorld, auto_clear_forces, get_world_auto_clear_forces, set_world_auto_clear_forces);
+
 LT_REGISTER_FIELD_FLOAT(LTWorld, scale);
 LT_REGISTER_FIELD_BOOL(LTWorld, debug);
+
+LT_REGISTER_PROPERTY_FLOAT(LTWorld, body_count, get_body_count, NULL);
+
 LT_REGISTER_METHOD(LTWorld, Step, world_step);
 LT_REGISTER_METHOD(LTWorld, Body, new_body);
 LT_REGISTER_METHOD(LTWorld, RayCast, world_ray_cast);
