@@ -1,3 +1,4 @@
+.DS_Store
 *~
 *.o
 *.a
@@ -17,6 +18,7 @@ linux/*
 osx/*
 ios/*
 android/*
+clients/android/assets/*
 mingw/
 *.out
 *.res
