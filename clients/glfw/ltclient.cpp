@@ -341,32 +341,59 @@ static LTKey convert_key(int key, bool shiftkey) {
         case '`':
           if (shiftkey) return LT_KEY_TILDE; return LT_KEY_TICK;
 
-        case 'A': return LT_KEY_A;
-        case 'B': return LT_KEY_B;
-        case 'C': return LT_KEY_C;
-        case 'D': return LT_KEY_D;
-        case 'E': return LT_KEY_E;
-        case 'F': return LT_KEY_F;
-        case 'G': return LT_KEY_G;
-        case 'H': return LT_KEY_H;
-        case 'I': return LT_KEY_I;
-        case 'J': return LT_KEY_J;
-        case 'K': return LT_KEY_K;
-        case 'L': return LT_KEY_L;
-        case 'M': return LT_KEY_M;
-        case 'N': return LT_KEY_N;
-        case 'O': return LT_KEY_O;
-        case 'P': return LT_KEY_P;
-        case 'Q': return LT_KEY_Q;
-        case 'R': return LT_KEY_R;
-        case 'S': return LT_KEY_S;
-        case 'T': return LT_KEY_T;
-        case 'U': return LT_KEY_U;
-        case 'V': return LT_KEY_V;
-        case 'W': return LT_KEY_W;
-        case 'X': return LT_KEY_X;
-        case 'Y': return LT_KEY_Y;
-        case 'Z': return LT_KEY_Z;
+
+        case 'A':
+          if (shiftkey) return LT_KEY_A; return LT_KEY_a;
+        case 'B':
+          if (shiftkey) return LT_KEY_B; return LT_KEY_b;
+        case 'C':
+          if (shiftkey) return LT_KEY_C; return LT_KEY_c;
+        case 'D':
+          if (shiftkey) return LT_KEY_D; return LT_KEY_d;
+        case 'E':
+          if (shiftkey) return LT_KEY_E; return LT_KEY_e;
+        case 'F':
+          if (shiftkey) return LT_KEY_F; return LT_KEY_f;
+        case 'G':
+          if (shiftkey) return LT_KEY_G; return LT_KEY_g;
+        case 'H':
+          if (shiftkey) return LT_KEY_H; return LT_KEY_h;
+        case 'I':
+          if (shiftkey) return LT_KEY_I; return LT_KEY_i;
+        case 'J':
+          if (shiftkey) return LT_KEY_J; return LT_KEY_j;
+        case 'K':
+          if (shiftkey) return LT_KEY_K; return LT_KEY_k;
+        case 'L':
+          if (shiftkey) return LT_KEY_L; return LT_KEY_l;
+        case 'M':
+          if (shiftkey) return LT_KEY_M; return LT_KEY_m;
+        case 'N':
+          if (shiftkey) return LT_KEY_N; return LT_KEY_n;
+        case 'O':
+          if (shiftkey) return LT_KEY_O; return LT_KEY_o;
+        case 'P':
+          if (shiftkey) return LT_KEY_P; return LT_KEY_p;
+        case 'Q':
+          if (shiftkey) return LT_KEY_Q; return LT_KEY_q;
+        case 'R':
+          if (shiftkey) return LT_KEY_R; return LT_KEY_r;
+        case 'S':
+          if (shiftkey) return LT_KEY_S; return LT_KEY_s;
+        case 'T':
+          if (shiftkey) return LT_KEY_T; return LT_KEY_t;
+        case 'U':
+          if (shiftkey) return LT_KEY_U; return LT_KEY_u;
+        case 'V':
+           if (shiftkey) return LT_KEY_V; return LT_KEY_v;
+        case 'W':
+          if (shiftkey) return LT_KEY_W; return LT_KEY_w;
+        case 'X':
+          if (shiftkey) return LT_KEY_X; return LT_KEY_x;
+        case 'Y':
+          if (shiftkey) return LT_KEY_B; return LT_KEY_y;
+        case 'Z':
+          if (shiftkey) return LT_KEY_Z; return LT_KEY_z;
 
         case GLFW_KEY_DEL: return LT_KEY_DEL;
         case GLFW_KEY_BACKSPACE: return LT_KEY_DEL;

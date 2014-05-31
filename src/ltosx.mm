@@ -176,83 +176,134 @@ static LTKey get_lt_key(NSEvent *event) {
     unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
     switch (key) {
         case 'a':
+          return LT_KEY_a;
         case 'A':
             return LT_KEY_A;
+
         case 'b':
+            return LT_KEY_b;
         case 'B':
             return LT_KEY_B;
+
         case 'c':
+            return LT_KEY_c;
         case 'C':
             return LT_KEY_C;
+
         case 'd':
+            return LT_KEY_d;
         case 'D':
             return LT_KEY_D;
+
         case 'e':
+            return LT_KEY_e;
         case 'E':
             return LT_KEY_E;
+
         case 'f':
+            return LT_KEY_f;
         case 'F':
             return LT_KEY_F;
+
         case 'g':
+            return LT_KEY_g;
         case 'G':
             return LT_KEY_G;
+
         case 'h':
+            return LT_KEY_h;
         case 'H':
             return LT_KEY_H;
+
         case 'i':
         case 'I':
             return LT_KEY_I;
+
         case 'j':
+            return LT_KEY_j;
         case 'J':
             return LT_KEY_J;
+
         case 'k':
+            return LT_KEY_k;
         case 'K':
             return LT_KEY_K;
+
         case 'l':
+            return LT_KEY_l;
         case 'L':
             return LT_KEY_L;
+
         case 'm':
+            return LT_KEY_m;
         case 'M':
             return LT_KEY_M;
+
         case 'n':
+            return LT_KEY_n;
         case 'N':
             return LT_KEY_N;
+
         case 'o':
+            return LT_KEY_o;
         case 'O':
             return LT_KEY_O;
+
         case 'p':
+            return LT_KEY_p;
         case 'P':
             return LT_KEY_P;
+
         case 'q':
+            return LT_KEY_q;
         case 'Q':
             return LT_KEY_Q;
+
         case 'r':
+            return LT_KEY_r;
         case 'R':
             return LT_KEY_R;
+
         case 's':
+            return LT_KEY_s;
         case 'S':
             return LT_KEY_S;
+
         case 't':
+            return LT_KEY_t;
         case 'T':
             return LT_KEY_T;
+
         case 'u':
+            return LT_KEY_u;
         case 'U':
             return LT_KEY_U;
+
         case 'v':
+            return LT_KEY_v;
         case 'V':
             return LT_KEY_V;
+
         case 'w':
+            return LT_KEY_w;
         case 'W':
             return LT_KEY_W;
+
         case 'x':
+            return LT_KEY_x;
         case 'X':
             return LT_KEY_X;
+
         case 'y':
+            return LT_KEY_y;
         case 'Y':
             return LT_KEY_Y;
+
         case 'z':
+            return LT_KEY_z;
         case 'Z':
             return LT_KEY_Z;
+
         case '0':
             return LT_KEY_0;
         case '1':
