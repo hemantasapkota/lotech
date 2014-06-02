@@ -374,8 +374,9 @@ libGLEW.a: rebuild
 libglfw.a: rebuild
 	cd $(GLFW_DIR) && $(MAKE) \
 		CC="gcc -m64 -arch x86_64" \
-		cocoa
-	cp $(GLFW_DIR)/lib/cocoa/libglfw.a .
+		# cocoa
+	# cp $(GLFW_DIR)/lib/cocoa/libglfw.a .
+	cp $(GLFW_DIR)/build/src/libglfw3.a .
 
 .PHONY: glfw_headers
 glfw_headers:
@@ -450,9 +451,8 @@ libGLEW.a: rebuild
 	cp $(GLEW_DIR)/lib/libGLEW.a .
 
 libglfw.a: rebuild
-	cd $(GLFW_DIR) && $(MAKE) \
-		x11
-	cp $(GLFW_DIR)/lib/x11/libglfw.a .
+	cd $(GLFW_DIR) && $(MAKE)
+	cp $(GLFW_DIR)/build/src/libglfw3.a $@
 
 .PHONY: glfw_headers
 glfw_headers:
