@@ -376,7 +376,7 @@ libglfw.a: rebuild
 		CC="gcc -m64 -arch x86_64" \
 		# cocoa
 	# cp $(GLFW_DIR)/lib/cocoa/libglfw.a .
-	cp $(GLFW_DIR)/build/src/libglfw3.a .
+	cp $(GLFW_DIR)/build/src/libglfw3.a ./libglfw.a
 
 .PHONY: glfw_headers
 glfw_headers:

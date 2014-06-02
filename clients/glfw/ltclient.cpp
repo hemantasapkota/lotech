@@ -119,7 +119,9 @@ int main(int argc, const char **argv) {
         // window is inactive.  This works around that (except that
         // it doesn't always work, because glfwGetWindowParam returns
         // incorrect results - see below).
-        if (!glfwGetWindowParam(GLFW_ACTIVE)) {
+        //
+        /* if (!glfwGetWindowParam(GLFW_ACTIVE)) { */  //GLFW 2
+        if (!glfwGetWindowAttrib(window, GLFW_FOCUSED)) {
             usleep(16000);
         }
 #endif
@@ -256,8 +258,8 @@ static void setup_window() {
 
 static void key_handler(GLFWwindow *win, int key, int scancode, int state, int mods) {
     bool shiftkey = state == GLFW_PRESS &&
-                    (glfwGetKey(GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ||
-                     glfwGetKey(GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS);
+                    (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ||
+                     glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS);
 
     LTKey ltkey = convert_key(key, shiftkey);
 
