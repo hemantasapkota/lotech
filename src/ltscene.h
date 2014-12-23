@@ -67,7 +67,7 @@ struct LTWrapNode : LTSceneNode {
     LTSceneNode *child;
 
     LTWrapNode();
-    
+
     virtual void init(lua_State *L);
     virtual void draw();
     virtual void visit_children(LTSceneNodeVisitor *v, bool reverse);
@@ -177,7 +177,7 @@ struct LTRectNode : LTSceneNode {
     LTfloat x1, y1, x2, y2;
 
     LTRectNode() {};
-    
+
     virtual void draw();
 };
 

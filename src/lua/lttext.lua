@@ -4,7 +4,7 @@ function lt.Text(str, font, halign, valign)
     valign = valign or "center"
 
     local em = font.m or font.M or font["0"] or {width = 0.1, height = 0.1}
-    local space = em.width * (font.space or 0.3)
+    local space = em.width * (font.space or 1.0)
     local hmove = em.width * (font.hmove or 0.05)
     local vmove = em.height * (font.vmove or 1.2)
     local kerntable = font.kern
@@ -12,6 +12,8 @@ function lt.Text(str, font, halign, valign)
     local x, y, dx, k, gap = 0, -em.height / 2, 0, 0, 0
     local line = lt.Layer()
     local scale = 1
+
+    -- print ( "local hmove, vmove, spacemove = " .. hmove .. "," .. vmove .. "," .. space)
 
     -- Build an array of lines.
     local lines = {line}
