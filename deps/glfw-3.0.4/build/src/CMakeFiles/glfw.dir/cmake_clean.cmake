@@ -1,4 +1,4 @@
-FILE(REMOVE_RECURSE
+file(REMOVE_RECURSE
   "CMakeFiles/glfw.dir/clipboard.c.o"
   "CMakeFiles/glfw.dir/context.c.o"
   "CMakeFiles/glfw.dir/gamma.c.o"
@@ -21,6 +21,6 @@ FILE(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-FOREACH(lang C)
-  INCLUDE(CMakeFiles/glfw.dir/cmake_clean_${lang}.cmake OPTIONAL)
-ENDFOREACH(lang)
+foreach(lang C)
+  include(CMakeFiles/glfw.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

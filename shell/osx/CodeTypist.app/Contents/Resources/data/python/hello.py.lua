@@ -1,0 +1,3 @@
+return [=[
+print ''Goodbye, World!''
+]=]

@@ -1,0 +1,26 @@
+return [=[
+module Concurrent
+
+  def self.allow_c_extensions?
+    defined?(RUBY_ENGINE) && RUBY_ENGINE == 'ruby'
+  end
+
+  def self.allow_c_native_class?(clazz)
+    allow_c_extensions? && Concurrent.const_defined?(clazz)
+  rescue
+    false
+  end
+
+  def self.safe_require_c_extensions
+    require 'concurrent_ruby_ext' if allow_c_extensions?
+  rescue LoadError
+
+  end
+
+  def self.safe_require_java_extensions
+    require 'concurrent_ruby_ext' if RUBY_PLATFORM == 'java'
+  rescue LoadError
+
+  end
+end
+]=]

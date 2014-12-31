@@ -24,7 +24,7 @@
 #endif
 
 #ifndef LTTITLE
-#define LTTITLE Lotech Client
+#define LTTITLE Code Typist
 #endif
 
 static void key_handler(GLFWwindow *win, int key, int scancode, int state, int mods);
@@ -421,7 +421,7 @@ static LTKey convert_key(int key, bool shiftkey) {
         case 'X':
           if (shiftkey) return LT_KEY_X; return LT_KEY_x;
         case 'Y':
-          if (shiftkey) return LT_KEY_B; return LT_KEY_y;
+          if (shiftkey) return LT_KEY_Y; return LT_KEY_y;
         case 'Z':
           if (shiftkey) return LT_KEY_Z; return LT_KEY_z;
 

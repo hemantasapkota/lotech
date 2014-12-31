@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleName</key>
+	<string>Code Typist</string>
+	<key>CFBundleDisplayName</key>
+	<string>Code Typist</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.laex.codetypist</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleExecutable</key>
+	<string>ltclient</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.6.8</string>
+	<key>CFBundleIconFile</key>
+	<string>codetypist.icns</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright (C) 2015 Hemanta Sapkota. 
+http://twitter.com/laex_pearl</string>
+</dict>
+</plist>
