@@ -433,6 +433,8 @@ static LTKey convert_key(int key, bool shiftkey) {
         case GLFW_KEY_DOWN: return LT_KEY_DOWN;
         case GLFW_KEY_RIGHT: return LT_KEY_RIGHT;
         case GLFW_KEY_LEFT: return LT_KEY_LEFT;
+
+        case GLFW_KEY_F1: return LT_KEY_F1;
     }
 
     return LT_KEY_UNKNOWN;

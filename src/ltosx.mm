@@ -344,6 +344,8 @@ static LTKey get_lt_key(NSEvent *event) {
             return LT_KEY_RIGHT;
         case 0x35:
             return LT_KEY_ESC;
+        case 0x7A:
+            return LT_KEY_F1;
         default:
             #ifdef LTDEVMODE
             fprintf(stderr, "Unknown key pressed: %hu\n", code);

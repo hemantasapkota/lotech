@@ -112,7 +112,10 @@ enum LTKey {
     LT_KEY_LEFT_ANGLE,
     LT_KEY_RIGHT_ANGLE,
     LT_KEY_QUESTION,
-    LT_KEY_PIPE
+    LT_KEY_PIPE,
+
+    //Functionl
+    LT_KEY_F1,
 };
 
 enum LTGamePadButton {

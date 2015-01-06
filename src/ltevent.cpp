@@ -265,6 +265,8 @@ static const LTEnumConstant key_enum_vals[] = {
     {"?", LT_KEY_QUESTION},
     {"|", LT_KEY_PIPE},
 
+    {"F1", LT_KEY_F1},
+
     {NULL, 0}};
 LT_REGISTER_FIELD_ENUM(LTEvent, key, LTKey, key_enum_vals)
 
