@@ -14,12 +14,13 @@ struct LTHTTPRequest : LTObject {
 
     char *err_buf;
 
-    CURLM* mcurl; 
+    CURLM* mcurl;
     CURL*  curl;
 
     LTfloat download_total; // may be 0 if total not yet known.
     LTfloat download_now;
     LTbool is_done;
+    LTint http_code;
 
     virtual void init(lua_State *L);
     void poll();

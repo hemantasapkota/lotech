@@ -1,6 +1,9 @@
 /* Copyright (C) 2010-2013 Ian MacLarty. See Copyright Notice in lt.h. */
 #include "lt.h"
 
+#include <string>
+#include <sstream>
+
 LT_INIT_IMPL(lthttp)
 
 LTHTTPRequest::LTHTTPRequest() {
@@ -9,6 +12,7 @@ LTHTTPRequest::LTHTTPRequest() {
     mcurl = NULL;
     curl = NULL;
     is_done = false;
+    http_code = 0;
 
     write_buf_capacity = 512;
     write_buf = new char[write_buf_capacity];
@@ -121,6 +125,7 @@ void LTHTTPRequest::poll() {
         int running;
         curl_multi_perform(mcurl, &running);
         if (running == 0) {
+            curl_easy_getinfo (curl, CURLINFO_RESPONSE_CODE, &http_code);
             is_done = true;
             cleanup_handles(this);
         }
@@ -174,6 +179,15 @@ static LTstring get_url(LTObject *obj) {
     return req->url;
 }
 
+//additions: hemanta
+static LTstring get_http_code(LTObject *obj) {
+    LTHTTPRequest *req = (LTHTTPRequest*)obj;
+    std::stringstream ss;
+    ss << req->http_code;
+    char *c = (char *)std::string(ss.str()).c_str();
+    return c;
+}
+
 static void set_url(LTObject *obj, LTstring url) {
     LTHTTPRequest *req = (LTHTTPRequest*)obj;
     if (req->url != NULL) {
@@ -213,3 +227,4 @@ LT_REGISTER_PROPERTY_BOOL_NOCONS(LTHTTPRequest, success, get_success, NULL)
 LT_REGISTER_PROPERTY_BOOL_NOCONS(LTHTTPRequest, failure, get_failure, NULL)
 LT_REGISTER_PROPERTY_STRING_NOCONS(LTHTTPRequest, response, get_response, NULL)
 LT_REGISTER_PROPERTY_STRING_NOCONS(LTHTTPRequest, error, get_error, NULL)
+LT_REGISTER_PROPERTY_STRING_NOCONS(LTHTTPRequest, status, get_http_code, NULL)
