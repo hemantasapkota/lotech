@@ -31,4 +31,4 @@ ltclient
 .*.swp
 D.*
 
-shell/*
+*.app
